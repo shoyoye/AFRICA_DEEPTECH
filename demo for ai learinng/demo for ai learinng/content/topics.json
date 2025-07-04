@@ -1,0 +1,58 @@
+{
+  "chemistry": {
+    "stoichiometry": {
+      "explanation": "Stoichiometry is the study of the relationship between the amounts of reactants and products in a chemical reaction.",
+      "explanation_alt": "Imagine you're cooking. Stoichiometry is like following a recipe — the right amount of ingredients gives you the correct meal (product)."
+    },
+    "acids_and_bases": {
+      "explanation": "Acids turn blue litmus paper red, have a sour taste, and pH less than 7. Bases turn red litmus blue and feel slippery.",
+      "explanation_alt": "Acids are like lemon juice — sour and sharp. Bases are like soap — bitter and slippery."
+    },
+    "periodic_table": {
+      "explanation": "The periodic table organizes elements based on their atomic number, groups, and periods.",
+      "explanation_alt": "Think of the periodic table as an element family chart. Elements in the same group behave in similar ways."
+    }
+  },
+  "physics": {
+    "motion": {
+      "explanation": "Motion is a change in position of an object over time, described using speed, velocity, and acceleration.",
+      "explanation_alt": "If something moves from one place to another, it's in motion — like a car driving or a ball rolling."
+    },
+    "electricity": {
+      "explanation": "Electricity is the flow of electric charge through a conductor, driven by voltage and resisted by resistance.",
+      "explanation_alt": "Electricity is like water flowing through a pipe. Voltage is the push, current is the flow, and resistance is like a blockage."
+    },
+    "work_and_energy": {
+      "explanation": "Work is done when a force moves an object. Energy is the ability to do work.",
+      "explanation_alt": "When you lift something heavy, you’re using energy to do work — that’s how they’re connected."
+    }
+  },
+  "biology": {
+    "photosynthesis": {
+      "explanation": "Photosynthesis is the process by which plants make their own food using sunlight, water, and carbon dioxide.",
+      "explanation_alt": "Plants use sunlight like humans use a stove — to cook their food from water and air."
+    },
+    "respiration": {
+      "explanation": "Respiration is how organisms break down food to release energy, using oxygen (aerobic) or not (anaerobic).",
+      "explanation_alt": "It’s like charging a phone. Respiration gives cells the energy they need to work."
+    },
+    "digestive_system": {
+      "explanation": "The digestive system breaks down food into nutrients the body can absorb and use.",
+      "explanation_alt": "It’s like a blender + filter: your stomach blends the food, your intestines absorb the good stuff."
+    }
+  },
+  "mathematics": {
+    "algebra": {
+      "explanation": "Algebra is a branch of mathematics that uses symbols to represent unknown values and solve equations.",
+      "explanation_alt": "Algebra is like solving a mystery: 'x' is the missing value you're trying to find."
+    },
+    "trigonometry": {
+      "explanation": "Trigonometry studies the relationship between angles and sides of triangles, using sine, cosine, and tangent.",
+      "explanation_alt": "In a right triangle, trigonometry helps you find unknown angles or lengths — like a measuring tool."
+    },
+    "mensuration": {
+      "explanation": "Mensuration deals with measuring the area, volume, and perimeter of shapes and solids.",
+      "explanation_alt": "Mensuration is about knowing how big or small something is — like the area of a room or volume of water in a bucket."
+    }
+  }
+}
