@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EduLite AI - Teacher Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <div class="header">
+    <h1>📚 Welcome, Teacher <span id="teacherName"></span></h1>
+    <p>Manage student records and set quizzes</p>
+  </div>
+
+  <div class="section-buttons">
+    <button onclick="showReportUpload()">📤 Upload Scores</button>
+    <button onclick="showCreateQuiz()">🧪 Create Quiz</button>
+    <button onclick="showTrainAI()">🤖 Train AI (Coming Soon)</button>
+    <button onclick="showAnalytics()">📈 View Analytics</button>
+  </div>
+
+  <div id="output"></div>
+  <button onclick="downloadScores()">⬇ Download Report (CSV)</button>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const name = localStorage.getItem("user") || "Teacher";
+      document.getElementById("teacherName").textContent = name;
+    });
+
+    function showReportUpload() {
+      document.getElementById('output').innerHTML = `
+        <h2>Upload Student Scores</h2>
+        <input type="text" id="studentName" placeholder="Student Name"><br>
+        <input type="text" id="studentSubject" placeholder="Subject"><br>
+        <input type="number" id="studentScore" placeholder="Score"><br>
+        <button onclick="saveScore()">Save Score</button>
+        <hr>
+        <h3>📋 Saved Scores</h3>
+        <div id="savedScores"></div>
+      `;
+      loadScores();
+    }
+
+    function saveScore() {
+      const name = document.getElementById("studentName").value.trim();
+      const subject = document.getElementById("studentSubject").value.trim();
+      const score = document.getElementById("studentScore").value;
+
+      if (!name || !subject || score === "") {
+        alert("Please fill all fields");
+        return;
+      }
+
+      let scores = JSON.parse(localStorage.getItem("scores") || "[]");
+      scores.push({ name, subject, score });
+      localStorage.setItem("scores", JSON.stringify(scores));
+
+      alert("✅ Score saved!");
+      showReportUpload();
+    }
+
+    function loadScores() {
+      const scores = JSON.parse(localStorage.getItem("scores") || "[]");
+      let html = "<ul>";
+      scores.forEach((s, i) => {
+        html += `<li>${s.name} - ${s.subject}: ${s.score}</li>`;
+      });
+      html += "</ul>";
+      document.getElementById("savedScores").innerHTML = html;
+    }
+
+    function downloadScores() {
+      const scores = JSON.parse(localStorage.getItem("scores") || "[]");
+      let content = "Name,Subject,Score\n" + scores.map(s => `${s.name},${s.subject},${s.score}`).join("\n");
+
+      const blob = new Blob([content], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "student_scores.csv";
+      link.click();
+    }
+
+    function showCreateQuiz() {
+      document.getElementById('output').innerHTML = `
+        <h2>Create a New Quiz Question</h2>
+        <input type="text" id="questionText" placeholder="Enter Question"><br>
+        <input type="text" id="optionA" placeholder="Option A"><br>
+        <input type="text" id="optionB" placeholder="Option B"><br>
+        <input type="text" id="optionC" placeholder="Option C"><br>
+        <input type="text" id="optionD" placeholder="Option D"><br>
+        <input type="text" id="correctAnswer" placeholder="Correct Answer (A/B/C/D)"><br>
+        <button onclick="saveQuiz()">Save Quiz</button>
+        <hr>
+        <h3>📚 Saved Questions</h3>
+        <div id="savedQuizzes"></div>
+      `;
+      loadSavedQuizzes();
+    }
+
+    function saveQuiz() {
+      const question = document.getElementById("questionText").value.trim();
+      const optionA = document.getElementById("optionA").value.trim();
+      const optionB = document.getElementById("optionB").value.trim();
+      const optionC = document.getElementById("optionC").value.trim();
+      const optionD = document.getElementById("optionD").value.trim();
+      const answer = document.getElementById("correctAnswer").value.trim().toUpperCase();
+
+      if (!question || !optionA || !optionB || !optionC || !optionD || !["A", "B", "C", "D"].includes(answer)) {
+        alert("❌ Please fill all fields and choose A/B/C/D as the correct answer.");
+        return;
+      }
+
+      const quiz = {
+        question,
+        options: [
+          "A. " + optionA,
+          "B. " + optionB,
+          "C. " + optionC,
+          "D. " + optionD
+        ],
+        answer
+      };
+
+      let quizzes = JSON.parse(localStorage.getItem("quiz") || "[]");
+      quizzes.push(quiz);
+      localStorage.setItem("quiz", JSON.stringify(quizzes));
+
+      alert("✅ Quiz question saved!");
+      showCreateQuiz();
+    }
+
+    function loadSavedQuizzes() {
+      const quizzes = JSON.parse(localStorage.getItem("quiz") || "[]");
+      let html = "<ul>";
+      quizzes.forEach((q, i) => {
+        html += `<li><strong>Q${i + 1}:</strong> ${q.question} <br>
+          ${q.options.join(", ")}<br>
+          <strong>Answer:</strong> ${q.answer}</li><br>`;
+      });
+      html += "</ul>";
+      document.getElementById("savedQuizzes").innerHTML = html;
+    }
+
+    function showTrainAI() {
+      document.getElementById('output').innerHTML = `
+        <h2>Train EduLite AI (Coming Soon)</h2>
+        <p>You will soon be able to upload your own curriculum-aligned explanations or past questions to help train EduLite AI for better responses.</p>
+        <p>In the next release, teachers will be able to contribute content with quality control.</p>
+      `;
+    }
+
+    function showAnalytics() {
+      const scores = JSON.parse(localStorage.getItem("scores") || "[]");
+      const quizzes = JSON.parse(localStorage.getItem("quiz") || "[]");
+
+      if (scores.length === 0 && quizzes.length === 0) {
+        document.getElementById("output").innerHTML = "<p>No data available for analytics yet.</p>";
+        return;
+      }
+
+      const studentScores = {};
+      scores.forEach(s => {
+        if (!studentScores[s.name]) studentScores[s.name] = [];
+        studentScores[s.name].push(Number(s.score));
+      });
+
+      const studentAverages = Object.entries(studentScores).map(([name, scores]) => {
+        const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+        return { name, avg: avg.toFixed(2) };
+      });
+
+      studentAverages.sort((a, b) => b.avg - a.avg);
+      const topStudents = studentAverages.slice(0, 3);
+
+      const subjectTotals = {};
+      const subjectCounts = {};
+
+      scores.forEach(s => {
+        const subj = s.subject;
+        const val = Number(s.score);
+        subjectTotals[subj] = (subjectTotals[subj] || 0) + val;
+        subjectCounts[subj] = (subjectCounts[subj] || 0) + 1;
+      });
+
+      const subjectAverages = Object.entries(subjectTotals).map(([subject, total]) => {
+        const avg = total / subjectCounts[subject];
+        return { subject, avg: avg.toFixed(2) };
+      });
+
+      subjectAverages.sort((a, b) => a.avg - b.avg);
+
+      let html = `<h2>📊 Dashboard Analytics</h2>`;
+
+      html += `<h3>🏅 Top Students</h3><ul>`;
+      topStudents.forEach(s => {
+        html += `<li>${s.name}: Average Score = ${s.avg}</li>`;
+      });
+      html += `</ul>`;
+
+      html += `<h3>📉 Weakest Subjects</h3><ul>`;
+      subjectAverages.slice(0, 3).forEach(s => {
+        html += `<li>${s.subject}: Average Score = ${s.avg}</li>`;
+      });
+      html += `</ul>`;
+
+      html += `<h3>🧾 Total Quizzes Created: ${quizzes.length}</h3>`;
+
+      document.getElementById("output").innerHTML = html;
+    }
+  </script>
+
+</body>
+</html>

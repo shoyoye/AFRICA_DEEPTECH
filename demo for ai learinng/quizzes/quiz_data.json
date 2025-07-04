@@ -1,0 +1,15 @@
+{
+    "quiz": [
+      {
+        "question": "What is solubility?",
+        "options": ["A. Ability to melt", "B. Ability to dissolve", "C. Ability to boil", "D. Ability to freeze"],
+        "answer": "B"
+      },
+      {
+        "question": "Which factor increases solubility?",
+        "options": ["A. Pressure", "B. Light", "C. Temperature", "D. Sound"],
+        "answer": "C"
+      }
+    ]
+  }
+  

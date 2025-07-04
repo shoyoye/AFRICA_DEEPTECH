@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EduLite AI - Student Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="header">
+    <h1>🎓 Welcome, <span id="studentName"></span></h1>
+    <p>Select a topic to begin learning</p>
+  </div>
+
+  <!-- Topic Buttons -->
+  <div class="section-buttons">
+    <button onclick="loadTopic('chemistry', 'stoichiometry')">Chemistry: Stoichiometry</button>
+    <button onclick="loadTopic('physics', 'motion')">Physics: Motion</button>
+    <button onclick="loadTopic('biology', 'photosynthesis')">Biology: Photosynthesis</button>
+    <button onclick="loadTopic('mathematics', 'algebra')">Math: Algebra</button>
+  </div>
+
+  <!-- Quiz Buttons -->
+  <div class="section-buttons">
+    <button onclick="startQuiz('practice')">📝 Practice Quiz</button>
+    <button onclick="startQuiz('recorded')">📚 Recorded Quiz</button>
+  </div>
+
+  <!-- Output for Topic Explanations -->
+  <div id="output" style="margin-top: 20px;"></div>
+
+  <!-- AI Interaction Section -->
+  <div id="ai-section" style="margin: 30px auto; padding: 15px; max-width: 600px; background: #f9f9f9; border-radius: 10px; box-shadow: 0 0 8px rgba(0,0,0,0.1);">
+    <h3>💬 Still Confused? Ask EduLite AI</h3>
+    <input type="text" id="studentQuestion" placeholder="Type your question..." style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; margin-bottom: 10px;">
+    <button onclick="handleAskAI()" style="padding: 10px 20px; background-color: #0077cc; color: white; border: none; border-radius: 8px; cursor: pointer;">Ask AI</button>
+    <div id="aiResponse" style="margin-top: 15px; font-style: italic;"></div>
+  </div>
+
+  <script src="student.js"></script>
+  <script src="ai.js"></script>
+</body>
+</html>

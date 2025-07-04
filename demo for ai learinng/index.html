@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EduLite AI - Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #c2e9fb, #a1c4fd);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #007acc;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<div class="login-box">
+  <h2>Login to EduLite</h2>
+  <input type="text" id="username" placeholder="Enter your name">
+  <select id="role">
+    <option value="student">Student</option>
+    <option value="teacher">Teacher</option>
+  </select>
+  <input type="password" id="password" placeholder="Enter your password">
+  <button onclick="login()">Login</button>
+</div>
+
+<!-- JavaScript comes here -->
+<script>
+  function login() {
+    // Collect input values
+    const name = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const role = document.getElementById('role').value;
+
+    // Check if all fields are filled
+    if (!name || !password) {
+      alert('Please fill all fields');
+      return;
+    }
+
+    // Password check (this is just a simple demo check)
+    if (role === 'teacher' && password !== '1234') {
+      alert('Wrong password for teacher');
+      return;
+    }
+
+    if (role === 'student' && password !== '0000') {
+      alert('Wrong password for student');
+      return;
+    }
+
+    // Save name and role in local storage (browser memory)
+    localStorage.setItem('user', name);
+    localStorage.setItem('role', role);
+
+    // Redirect based on role
+    if (role === 'student') {
+      window.location.href = 'student_dashboard.html';
+    } else {
+      window.location.href = 'teacher_dashboard.html';
+    }
+  }
+</script>
+
+</body>
+</html>
